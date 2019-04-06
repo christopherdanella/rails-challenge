@@ -1,4 +1,5 @@
 class Variant < ApplicationRecord
   belongs_to :product
-  has_many :orders
+  has_many :variations
+  has_many :orders, through: :variations
 end
