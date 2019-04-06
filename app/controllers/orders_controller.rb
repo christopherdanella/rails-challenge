@@ -1,17 +1,21 @@
 class OrdersController < ActionController::API
 
-
   def create
     @order = Order.new(permitted_params)
-
+    
     if @order.save
       render json: @order 
     else
       render json: {
-        error: "Missing required parameters for Customer, Status, or Cost",
+        error: @order.errors.messages,
         status: 400
       }, status: 400
     end
+  end
+
+  def show
+    @order = Order.find(params[:id])
+    render json: @order
   end
 
   private
