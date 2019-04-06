@@ -14,7 +14,7 @@ class OrdersController < ActionController::API
   end
 
   def show
-    @order = Order.find(params[:id])
+    @order = Order.find(params[:id]).to_json
     render json: @order
   end
 

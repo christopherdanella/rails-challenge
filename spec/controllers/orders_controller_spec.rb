@@ -15,7 +15,15 @@ RSpec.describe OrdersController, type: :controller do
       data = JSON.parse(response.body)
       expect(data["id"]).to eq Order.last.id
     end
-  end 
+    
+    it "returns a 400 without required params" do
+      expect {
+        binding.pry
+        post :create, params: { order: attributes_for(:order).merge(customer_id: nil, variant_ids: nil) }
+      }.to change(Order, :count).by(0)
+      expect(response.status).to eq(400)
+    end
+  end
 
 
 end
