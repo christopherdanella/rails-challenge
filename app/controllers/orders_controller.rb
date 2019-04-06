@@ -24,7 +24,8 @@ class OrdersController < ActionController::API
     params.require(:order).permit(
       :customer_id,
       :total_cost,
-      :status
+      :status,
+      variant_ids: [],
     )
   end
 
