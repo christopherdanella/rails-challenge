@@ -12,7 +12,6 @@ class Order < ApplicationRecord
    
   validates :status, inclusion: { in: ORDER_STATUS }
   
-  private
   def set_total_cost
     self.total_cost = variants.sum { |variant| variant.cost } 
   end
