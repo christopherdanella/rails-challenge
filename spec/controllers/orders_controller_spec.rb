@@ -30,7 +30,9 @@ RSpec.describe OrdersController, type: :controller do
       }.to change(Order, :count).by(0)
       expect(response.status).to eq(404)
     end
-
+    
+    # despite the variant2 having a stock_amount of 0, this test doesn't return the 422
+    # I'm expecting.
     it "returns a 422 when variant is out of stock" do
       expect {
         post :create, params: { order: attributes_for(:order).merge(customer_id: customer.id, variant_ids: variant2.id) }
