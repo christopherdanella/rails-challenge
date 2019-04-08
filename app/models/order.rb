@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
-  before_save :set_total_cost 
+  before_save :set_total_cost
+  
   ORDER_STATUS = ['pending', 'processing', 'fulfilled', 'delivered', 'canceled'] 
 
   belongs_to :customer
@@ -7,9 +8,9 @@ class Order < ApplicationRecord
   has_many :variants, through: :variations
 
   validates_presence_of :customer
-   
+
   validates :status, inclusion: { in: ORDER_STATUS }
-  
+
   def as_json(options={})
     super(include: :variants)
   end 
